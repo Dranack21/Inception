@@ -1,7 +1,4 @@
-FROM DEBIAN
+FROM debian:bullseye
 
-RUN mkdir prout \
-	cd prout \
-	touch hello 
-
-
+RUN apt update \
+	apt install -y nginx \
