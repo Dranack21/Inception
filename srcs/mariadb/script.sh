@@ -20,8 +20,14 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
     echo "Setting up MariaDB root password and database..."
     mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';"
     mysql -uroot -p"$MARIADB_ROOT_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS \`$MARIADB_DATABASE\`;"
-    mysql -uroot -p"$MARIADB_ROOT_PASSWORD" -e "CREATE USER IF NOT EXISTS '$MARIADB_USER'@'%' IDENTIFIED BY '$MARIADB_PASSWORD';"
-    mysql -uroot -p"$MARIADB_ROOT_PASSWORD" -e "GRANT ALL PRIVILEGES ON \`$MARIADB_DATABASE\`.* TO '$MARIADB_USER'@'%';"
+    
+    # Create user with access from any host
+    mysql -uroot -p"$MARIADB_ROOT_PASSWORD" -e \
+      "CREATE USER IF NOT EXISTS '$MARIADB_USER'@'%' IDENTIFIED BY '$MARIADB_PASSWORD';"
+    
+    mysql -uroot -p"$MARIADB_ROOT_PASSWORD" -e \
+      "GRANT ALL PRIVILEGES ON \`$MARIADB_DATABASE\`.* TO '$MARIADB_USER'@'%';"
+    
     mysql -uroot -p"$MARIADB_ROOT_PASSWORD" -e "FLUSH PRIVILEGES;"
     
     echo "Database setup completed successfully."

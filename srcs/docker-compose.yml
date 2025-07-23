@@ -4,62 +4,41 @@ services:
     build: ./mariadb
     container_name: mariadb
     restart: always
-    environment:
-      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
-      - MARIADB_DATABASE=${MARIADB_DATABASE}
-      - MARIADB_USER=${MARIADB_USER}
-      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+    env_file:
+      - .env
     volumes:
       - wordpress_files:/var/lib/mysql
     networks:
       - oupi
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 5s
-      retries: 10
-      interval: 10s
-  
+
   wordpress:
     depends_on:
-      mariadb:
-        condition: service_healthy
+      - mariadb
     build: ./wordpress
     container_name: wordpress
     restart: always
-    environment:
-      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
-      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
-      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
-      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+    env_file:
+      - .env
     volumes:
       - wordpress_database:/var/www/html
     networks:
       - goupi
       - oupi
-    healthcheck:
-      test: ["CMD-SHELL", "pidof php-fpm7.4 || pidof php-fpm"]
-      timeout: 5s
-      retries: 5
-      interval: 10s
   
   nginx:
     depends_on:
-      wordpress:
-        condition: service_healthy
+      - wordpress
     build: ./nginx
     container_name: nginx
+    env_file:
+      - .env
     restart: always
     ports:
       - "443:443"
     volumes:
       - wordpress_database:/var/www/html
     networks:
-      - oupi
-    healthcheck:
-      test: ["CMD", "nginx", "-t"]
-      timeout: 5s
-      retries: 3
-      interval: 30s
+      - goupi
   
 volumes:
   wordpress_database:

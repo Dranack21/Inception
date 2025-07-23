@@ -8,7 +8,6 @@ RUN mkdir -p /etc/nginx/ssl && \
 	-out /etc/nginx/ssl/nginx.crt \
     -subj "/C=FR/ST=Paris/L=Paris/O=42/CN=habouda42"
 
-RUN mkdir -p /var/www/html && echo "Hello from HTTPS!" > /var/www/html/index.html
 
 
 ##DOCUMENTATION DOESNT DO ANYTHING
