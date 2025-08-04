@@ -28,6 +28,9 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
     mysql -uroot -p"$MARIADB_ROOT_PASSWORD" -e \
       "GRANT ALL PRIVILEGES ON \`$MARIADB_DATABASE\`.* TO '$MARIADB_USER'@'%';"
     
+    echo "Removing anonymous users..."
+    mysql -uroot -p"$MARIADB_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User = '';"
+    
     mysql -uroot -p"$MARIADB_ROOT_PASSWORD" -e "FLUSH PRIVILEGES;"
     
     echo "Database setup completed successfully."
