@@ -10,8 +10,8 @@ down:
 clean:
 	rm -rf /home/habouda42/data/mariadb/
 	rm -rf /home/habouda42/data/wordpress/
-	rm -rf srcs/.env
 	docker compose -f srcs/docker-compose.yml down -v
+	rm -rf srcs/.env
 
 re: clean up
 
