@@ -2,9 +2,8 @@
 This repository contains my attempt at the Inception project from 42.
 The main goal of this project is to learn how to use docker and create your own images
 ## Overview:
-
-
-
+Setups a wordpress page using nginx and mariadb<br/>
+One container is used per service
 ## Requirements:
 YOU NEED TO PROVIDE AN .env FILE FOR THE PROJECT TO WORK<br/>
 you can either add it inside /home/.env or in the srcs directory of the project <br/>
@@ -38,6 +37,18 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 
 ## How to use:
 
+Creates the containers and launches everything
+```bash
+make up
+```
+Stops the containers but doesnt wipe data
 
+```bash
+make down
+```
 
+Stop the containers and wipes all data
+```bash
+make clean
+```
 
