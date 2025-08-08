@@ -2,11 +2,14 @@
 This repository contains my attempt at the Inception project from 42.
 The main goal of this project is to learn how to use docker and create your own images
 ## Overview:
-Setups a wordpress page using nginx and mariadb<br/>
+Sets up a WordPress page using nginx and mariadb<br/>
 One container is used per service
 ## Requirements:
-YOU NEED TO PROVIDE AN .env FILE FOR THE PROJECT TO WORK<br/>
-you can either add it inside /home/.env or in the srcs directory of the project <br/>
+You must provide an `.env` file for the project to work.<br/>
+You can place it in either:
+- `/home/.env`
+- The `srcs` directory of the project
+
 
 For the project to work on your machine you will also need to have docker installed<br/>
 (Here's how to install it assuming that you're using apt as your package manager)
@@ -27,7 +30,7 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
   $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update}
+sudo apt-get update
 ```
 
 ```bash
@@ -41,7 +44,7 @@ Creates the containers and launches everything
 ```bash
 make up
 ```
-Stops the containers but doesnt wipe data
+Stops the containers but doesn't wipe data
 
 ```bash
 make down
