@@ -6,8 +6,8 @@ The main goal of this project is to learn how to use docker and create your own 
 
 
 ## Requirements:
-For the project to work on your machine you will need to have docker installed 
-(How to install it assuming that you're using apt has a package manager)
+For the project to work on your machine you will need to have docker installed \n
+(Here's how to install it assuming that you're using apt has a package manager)
 ```bash
 for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
 ```
