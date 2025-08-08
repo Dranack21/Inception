@@ -1,3 +1,3 @@
-##Inception 42 project##
+## Inception 42 project:
 
 Overview
