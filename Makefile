@@ -21,7 +21,6 @@ LOCAL_ENV = srcs/.env
 check-env:
 	@if [ ! -f "$(ENV_FILE)" ]; then \
 		echo "❌ Error: Environment file not found at $(ENV_FILE)"; \
-		echo "Set custom path with: make ENV_FILE=/path/to/.env up"; \
 		exit 1; \
 	fi
 	@echo "✅ Found $(ENV_FILE), copying to project..."
