@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   mariadb:
+    user: "1000:1000"
     build: ./requirements/mariadb 
     container_name: mariadb
     restart: always
