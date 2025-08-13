@@ -9,7 +9,7 @@ down:
 
 clean:
 	docker compose -f srcs/docker-compose.yml down -v
-	docker run --rm -v /home/habouda42/data:/data alpine sh -c "rm -rf /data/mariadb/ /data/wordpress/"
+	docker run --rm -v /home/habouda42/data:/data --user root alpine sh -c "rm -rf /data/mariadb/* /data/wordpress/*"
 	rm -rf srcs/.env
 
 re: clean up

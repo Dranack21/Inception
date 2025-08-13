@@ -8,7 +8,7 @@ services:
     env_file:
       - .env
     volumes:
-      - wordpress_files:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql  # Fixed: MariaDB should use mariadb_data
     networks:
       - oupi
 
@@ -22,7 +22,7 @@ services:
     env_file:
       - .env
     volumes:
-      - wordpress_database:/var/www/html
+      - wordpress_data:/var/www/html  # Fixed: WordPress should use wordpress_data
     networks:
       - goupi
       - oupi
@@ -38,7 +38,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - wordpress_database:/var/www/html
+      - wordpress_data:/var/www/html  # Fixed: Nginx needs WordPress files, not MariaDB
     networks:
       - goupi
 
@@ -50,19 +50,19 @@ services:
       - oupi
 
 volumes:
-  wordpress_database:
+  mariadb_data:  # Renamed for clarity
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/habouda42/data/wordpress
+      device: /home/habouda42/data/mariadb  # MariaDB data goes here
     
-  wordpress_files:
+  wordpress_data:  # Renamed for clarity
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/habouda42/data/mariadb
+      device: /home/habouda42/data/wordpress  # WordPress files go here
 
 networks:
   oupi:
